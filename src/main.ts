@@ -11,5 +11,21 @@ export const translate = (word)=>{
     salt:Math.random(),
     sing: md5('123'),
   })
-  console.log(https)
+  const options = {
+    hostname: 'fanyi-api.baidu.com',
+    port: 443,
+    path: '/api/trans/vip/translate',
+    method: 'GET'
+  };
+  const req = https.request(options, (res) => {
+    console.log('状态码:', res.statusCode);
+    console.log('请求头:', res.headers);
+    res.on('data', (d) => {
+      process.stdout.write(d);
+    });
+  });
+  req.on('error', (e) => {
+    console.error(e);
+  });
+  req.end();
 }
